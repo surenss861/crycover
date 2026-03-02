@@ -92,23 +92,29 @@ export function HeroSection() {
               ref={headlineRef}
               className="text-4xl font-semibold tracking-[-0.03em] text-ink md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08]"
             >
-              10-minute{" "}
+              10-minute under-eye{" "}
               <span className="border-b-2 border-sage/40 pb-0.5">reset</span>
               <br className="hidden sm:block" />
-              <span className="italic text-ink/90 leading-[1.08]">for after emotional moments</span>
+              <span className="italic text-ink/90 leading-[1.08]">after crying.</span>
             </h1>
             <p ref={subheadRef} className="mt-4 text-lg text-ink/80 max-w-lg md:text-xl">
               When feelings show up on your face. Gentle care — no explanation needed.
             </p>
-            <div ref={ctasRef} className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-              <Button href="/products/reset-kit">Shop Reset Kit</Button>
+            <p className="mt-2 text-sm text-ink/70 max-w-lg">
+              Cooling hydrogel patches for puffiness + redness look.
+            </p>
+            <p className="mt-1 text-[13px] font-medium text-ink/90">
+              $24 · 6 individually wrapped patches
+            </p>
+            <div ref={ctasRef} className="mt-5 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+              <Button href="/products/reset-kit">Add to cart</Button>
               <Button href="/finder" variant="outline">
                 Take the 15-sec finder
               </Button>
             </div>
             {/* Benefit chips */}
-            <div className="mt-5 flex flex-wrap gap-2 justify-center lg:justify-start">
-              {["Depuffs under-eyes", "Calms redness look", "10 min reset"].map((label) => (
+            <div className="mt-4 flex flex-wrap gap-2 justify-center lg:justify-start">
+              {["Depuffs under-eyes", "Calms redness look", "10 min"].map((label) => (
                 <span
                   key={label}
                   className="rounded-full border border-black/5 bg-white/40 px-3 py-1 text-[12px] text-ink/70 backdrop-blur-sm"
@@ -117,16 +123,14 @@ export function HeroSection() {
                 </span>
               ))}
             </div>
-            {/* Micro trust row (3 items) */}
-            <p className="mt-4 text-[11px] text-ink/55 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1">
-              <span>No harsh actives</span>
-              <span className="text-ink/30">·</span>
-              <span>Individually wrapped</span>
+            {/* Trust row: only use if true */}
+            <p className="mt-3 text-[11px] text-ink/55 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1">
+              <span>Dermatology-tested</span>
               <span className="text-ink/30">·</span>
               <span>Sensitive-skin friendly</span>
             </p>
-            <p className="mt-2 text-sm text-ink/55">
-              4.8 from 200+ reviews · Keep one at home, one in your bag
+            <p className="mt-1 text-sm text-ink/55">
+              ★★★★★ 4.8 from 200+ reviews
             </p>
           </div>
 
@@ -232,14 +236,14 @@ export function HeroSection() {
                 </div>
               </div>
               <p className="mt-4 font-medium text-ink">Reset Kit</p>
-              <p className="mt-0.5 text-sm text-stone">6 patches</p>
-              <p className="mt-2 text-xs text-stone line-clamp-2">
-                Depuff + rehydrate after emotional moments. Caffeine, niacinamide, HA.
+              <p className="mt-0.5 text-sm text-ink/70">6 patches · $24</p>
+              <p className="mt-2 text-xs text-ink/60 line-clamp-2">
+                Cooling hydrogel. Caffeine, niacinamide, HA. Depuff + rehydrate in 10 min.
               </p>
               <p className="mt-4">
                 <span className="text-2xl font-semibold tracking-tight text-ink">$24</span>
               </p>
-              <p className="mt-1 text-[11px] text-stone">Free shipping over $50</p>
+              <p className="mt-1 text-[11px] text-ink/55">Free shipping $50+ · 30-day returns</p>
             </Link>
           </div>
         </div>

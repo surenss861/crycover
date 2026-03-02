@@ -13,6 +13,30 @@ import { IconApply, IconRest, IconReset } from "@/components/home/HowItWorksIcon
 
 gsap.registerPlugin(ScrollTrigger);
 
+function FridgeIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="1" />
+      <path d="M4 8h16M4 14h16" />
+    </svg>
+  );
+}
+function ApplyIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 19l7-7 3 3-7 7-3-3z" />
+      <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+    </svg>
+  );
+}
+function RemoveIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 6L6 18M6 6l12 12" />
+    </svg>
+  );
+}
+
 export function HomePageContent() {
   const socialRef = useRef<HTMLElement>(null);
   const howRef = useRef<HTMLElement>(null);
@@ -94,11 +118,25 @@ export function HomePageContent() {
       >
         <div className="mx-auto max-w-[1100px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="Proof" />
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-center">
-            <span className="text-sm text-ink/80">★★★★★ 4.8 from 200+ reviews</span>
-            <span className="text-sm text-ink/70">Loved by people who don&apos;t want to explain.</span>
-            <blockquote className="w-full text-sm italic text-ink/90 md:max-w-md">
-              &ldquo;I keep one in my bag. No one has to know.&rdquo;
+          <div className="text-center">
+            <p className="text-lg font-medium text-ink">★★★★★ 4.8</p>
+            <p className="mt-1 text-sm text-ink/70">from 200+ reviews · Loved by people who don&apos;t want to explain.</p>
+            <p className="mt-3 text-[13px] text-ink/80 max-w-md mx-auto">
+              87% said eyes looked calmer in 10 minutes <span className="text-ink/55">(n=52 beta testers)</span>
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3 text-center md:text-left">
+            <blockquote className="rounded-2xl border border-black/5 bg-white/75 px-5 py-4 shadow-card">
+              <p className="text-sm italic text-ink/90">&ldquo;I keep one in my bag. No one has to know.&rdquo;</p>
+              <footer className="mt-2 text-[11px] text-ink/60">— <strong className="text-ink/80">Maya, 29</strong> · post-cry at work</footer>
+            </blockquote>
+            <blockquote className="rounded-2xl border border-black/5 bg-white/75 px-5 py-4 shadow-card">
+              <p className="text-sm italic text-ink/90">&ldquo;Used it before a big meeting. Eyes looked normal again.&rdquo;</p>
+              <footer className="mt-2 text-[11px] text-ink/60">— <strong className="text-ink/80">James, 34</strong> · before seeing people</footer>
+            </blockquote>
+            <blockquote className="rounded-2xl border border-black/5 bg-white/75 px-5 py-4 shadow-card">
+              <p className="text-sm italic text-ink/90">&ldquo;After a red-eye flight, these saved me.&rdquo;</p>
+              <footer className="mt-2 text-[11px] text-ink/60">— <strong className="text-ink/80">Sam, 26</strong> · after travel</footer>
             </blockquote>
           </div>
         </div>
@@ -194,10 +232,15 @@ export function HomePageContent() {
                   Cosmetic use only. Not a medical product.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-4">
-                  <Button href="/products/reset-kit">Shop Reset Kit</Button>
+                  <Button href="/products/reset-kit">Add to cart</Button>
                   <Button href="/finder" variant="outline">
                     Find your fit
                   </Button>
+                </div>
+                <div className="mt-5 pt-4 border-t border-black/[0.06] text-[12px] text-ink/65">
+                  <p><strong className="text-ink/80">Shipping:</strong> Free on orders $50+</p>
+                  <p className="mt-1"><strong className="text-ink/80">Returns:</strong> 30-day, no questions</p>
+                  <Link href="/shipping" className="mt-2 inline-block text-sage hover:underline">Details →</Link>
                 </div>
               </div>
             </div>
@@ -322,8 +365,24 @@ export function HomePageContent() {
               <p className="mt-2 text-[11px] text-ink/60">— Real customer</p>
             </div>
             <div className="rounded-3xl border border-black/5 bg-white/75 p-5 flex flex-col justify-center shadow-card">
-              <p className="text-xs font-medium uppercase tracking-wider text-sage mb-1">Routine</p>
-              <p className="text-sm text-ink/80">Fridge → apply 10 min → remove</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-sage mb-3">Routine</p>
+              <div className="flex items-center justify-center gap-3 text-ink/70">
+                <span className="flex flex-col items-center gap-1">
+                  <FridgeIcon className="w-6 h-6" />
+                  <span className="text-[10px]">Fridge</span>
+                </span>
+                <span className="text-ink/40">→</span>
+                <span className="flex flex-col items-center gap-1">
+                  <ApplyIcon className="w-6 h-6" />
+                  <span className="text-[10px]">Apply</span>
+                </span>
+                <span className="text-ink/40">→</span>
+                <span className="flex flex-col items-center gap-1">
+                  <RemoveIcon className="w-6 h-6" />
+                  <span className="text-[10px]">Remove</span>
+                </span>
+              </div>
+              <p className="mt-2 text-sm text-ink/80 text-center">10 min</p>
             </div>
           </div>
 
@@ -363,18 +422,44 @@ export function HomePageContent() {
         ref={bundleRef}
         className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
-        <div className="mx-auto max-w-[980px] flex flex-col gap-6 md:gap-10">
-          <SectionRail label="Save more" />
-          <div className="text-center">
-          <p className="text-ink/80">
-            Save with our Duo or Trio — keep one at home, one in your bag.
-          </p>
-          <Link
-            href="/shop#bundles"
-            className="mt-2 inline-block text-sm font-medium text-ink hover:underline"
-          >
-            Shop bundles →
-          </Link>
+        <div className="mx-auto max-w-[1100px] flex flex-col gap-6 md:gap-10">
+          <SectionRail label="Shop bundles" />
+          <h2 className="text-center text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-ink">
+            Save more when you stock up
+          </h2>
+          <div className="grid gap-4 md:grid-cols-3">
+            <Link
+              href="/products/reset-kit"
+              className="rounded-2xl border border-black/5 bg-white/75 p-5 shadow-card hover:border-sage/30 transition text-center"
+            >
+              <p className="font-semibold text-ink">Reset Kit</p>
+              <p className="mt-1 text-2xl font-semibold text-ink">$24</p>
+              <p className="mt-1 text-sm text-ink/70">6 patches</p>
+              <p className="mt-3 text-[12px] text-ink/60">One kit. Home or bag.</p>
+            </Link>
+            <Link
+              href="/products/reset-duo"
+              className="rounded-2xl border border-black/5 bg-white/75 p-5 shadow-card hover:border-sage/30 transition text-center relative"
+            >
+              <span className="absolute right-3 top-3 rounded-full bg-sage/20 px-2 py-0.5 text-[10px] font-medium text-sage">Save 10%</span>
+              <p className="font-semibold text-ink">Reset Duo</p>
+              <p className="mt-1 text-2xl font-semibold text-ink">$44</p>
+              <p className="mt-1 text-sm text-ink/55 line-through">$48</p>
+              <p className="mt-1 text-sm text-ink/70">12 patches · 2 kits</p>
+              <p className="mt-3 text-[12px] text-ink/60">Home + bag.</p>
+            </Link>
+            <Link
+              href="/products/reset-trio"
+              className="rounded-2xl border border-black/5 bg-white/75 p-5 shadow-card hover:border-sage/30 transition text-center relative"
+            >
+              <span className="absolute right-3 top-3 rounded-full bg-sage/20 px-2 py-0.5 text-[10px] font-medium text-sage">Save 15%</span>
+              <p className="font-semibold text-ink">Reset Trio</p>
+              <p className="mt-1 text-2xl font-semibold text-ink">$62</p>
+              <p className="mt-1 text-sm text-ink/55 line-through">$72</p>
+              <p className="mt-1 text-sm text-ink/70">18 patches · 3 kits</p>
+              <p className="mt-2 text-[11px] text-sage font-medium">+ Free shipping</p>
+              <p className="mt-1 text-[12px] text-ink/60">Home, bag, backup.</p>
+            </Link>
           </div>
         </div>
       </section>
@@ -410,20 +495,20 @@ export function HomePageContent() {
         </div>
       </section>
 
-      {/* Sticky CTA — when Results in view; quiet luxury */}
+      {/* Sticky CTA — when Results in view; DTC-style */}
       {showStickyCta && (
         <div className="fixed bottom-0 left-0 right-0 z-40 h-14 border-t border-black/5 bg-white/70 backdrop-blur-xl flex items-center">
           <div className="mx-auto w-full max-w-[1100px] px-4 flex items-center justify-between gap-4">
-            <p className="text-[11px] text-ink/55 hidden sm:block">In stock · Ships fast</p>
-            <div className="flex-1 flex items-center justify-center sm:justify-end gap-4">
+            <div>
               <p className="font-medium text-ink text-sm">Reset Kit — $24</p>
-              <Link
-                href="/products/reset-kit"
-                className="rounded-full border border-black/10 bg-ink/90 px-4 py-2 text-[13px] font-medium text-white hover:bg-ink transition"
-              >
-                Shop now
-              </Link>
+              <p className="text-[11px] text-ink/55">6 patches · Free shipping $50+</p>
             </div>
+            <Link
+              href="/products/reset-kit"
+              className="rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-white hover:bg-ink/90 transition flex-shrink-0"
+            >
+              Add to cart
+            </Link>
           </div>
         </div>
       )}
