@@ -23,14 +23,16 @@ body {
   }
 }
 
-/* Hero product card: tilt + shadow bloom on hover */
+/* Hero product card: tilt + shadow bloom on hover (respect reduced motion) */
 .hero-card {
   will-change: transform;
 }
-.hero-card:hover {
-  transform: perspective(800px) rotateY(-2deg) rotateX(1.5deg);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
-    0 8px 32px -8px rgba(0, 0, 0, 0.08),
-    0 28px 64px -20px rgba(0, 0, 0, 0.12);
+@media (prefers-reduced-motion: no-preference) {
+  .hero-card:hover {
+    transform: perspective(800px) rotateY(-2deg) rotateX(1.5deg);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+      0 8px 32px -8px rgba(0, 0, 0, 0.08),
+      0 28px 64px -20px rgba(0, 0, 0, 0.12);
+  }
 }

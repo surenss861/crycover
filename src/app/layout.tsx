@@ -18,6 +18,12 @@ export const metadata: Metadata = {
     "Under-eye + upper cheek patches for when feelings show. Gentle care, no explanation needed.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover" as const,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="min-h-screen font-sans">{children}</body>
+      <body className="min-h-[100dvh] font-sans overflow-x-hidden">{children}</body>
     </html>
   );
 }

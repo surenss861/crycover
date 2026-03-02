@@ -7,6 +7,7 @@ type ButtonProps = {
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit";
+  "data-track"?: string;
 };
 
 export function Button({
@@ -16,9 +17,10 @@ export function Button({
   className = "",
   onClick,
   type = "button",
+  "data-track": dataTrack,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-ink/15";
+    "inline-flex items-center justify-center min-h-[44px] h-11 rounded-full px-6 py-3 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-offset-2";
   const variants = {
     primary:
       "relative overflow-hidden text-cream hover:brightness-105 " +
@@ -28,17 +30,16 @@ export function Button({
     outline: "border-2 border-ink/15 text-ink hover:bg-ink/5 hover:border-ink/25",
   };
   const styles = `${base} ${variants[variant]} ${className}`;
-
   if (href) {
     return (
-      <Link href={href} className={styles}>
+      <Link href={href} className={styles} {...(dataTrack ? { "data-track": dataTrack } : {})}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button type={type} className={styles} onClick={onClick}>
+    <button type={type} className={styles} onClick={onClick} data-track={dataTrack}>
       {children}
     </button>
   );

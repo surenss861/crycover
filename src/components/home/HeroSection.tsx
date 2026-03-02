@@ -44,7 +44,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden border-b border-black/[0.06] bg-gradient-to-b from-sand/30 to-surface px-4 py-14 md:py-20 md:px-6 min-h-[78vh] flex flex-col justify-center">
+    <section className="relative overflow-hidden border-b border-black/[0.06] bg-gradient-to-b from-sand/30 to-surface px-4 py-14 md:py-20 md:px-6 min-h-[min(78vh,78dvh)] flex flex-col justify-center">
       <HeroCanvas />
 
       {/* Atmospheric wordmark — not shouting */}
@@ -90,48 +90,55 @@ export function HeroSection() {
             </p>
             <h1
               ref={headlineRef}
-              className="text-4xl font-semibold tracking-[-0.03em] text-ink md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08]"
+              className="font-semibold tracking-[-0.03em] text-ink leading-[1.08] [font-size:clamp(2.1rem,5vw,3.75rem)] md:tracking-[-0.04em]"
             >
               10-minute under-eye{" "}
               <span className="border-b-2 border-sage/40 pb-0.5">reset</span>
               <br className="hidden sm:block" />
               <span className="italic text-ink/90 leading-[1.08]">after crying.</span>
             </h1>
-            <p ref={subheadRef} className="mt-4 text-lg text-ink/80 max-w-lg md:text-xl">
+            <p className="mt-2 text-sm text-ink/60 max-w-lg uppercase tracking-[0.12em]">
+              For post-cry meetings, dates, and &ldquo;I&apos;m fine&rdquo; moments.
+            </p>
+            <p ref={subheadRef} className="mt-3 text-lg text-ink/80 max-w-lg md:text-xl">
               When feelings show up on your face. Gentle care — no explanation needed.
             </p>
-            <p className="mt-2 text-sm text-ink/70 max-w-lg">
+            <p className="mt-2 text-sm font-medium text-ink/80 max-w-lg italic">
+              Keep one in your bag. Nobody has to know.
+            </p>
+            <p className="mt-2 text-sm text-ink/80 max-w-lg">
               Cooling hydrogel patches for puffiness + redness look.
             </p>
             <p className="mt-1 text-[13px] font-medium text-ink/90">
               $24 · 6 individually wrapped patches
             </p>
             <div ref={ctasRef} className="mt-5 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-              <Button href="/products/reset-kit">Add to cart</Button>
-              <Button href="/finder" variant="outline">
+              <Button href="/products/reset-kit" data-track="add_to_cart">Add to cart</Button>
+              <Button href="/finder" variant="outline" data-track="finder_start">
                 Take the 15-sec finder
               </Button>
             </div>
+            {/* Micro-proof strip — checkout reassurance bar */}
+            <div className="mt-4 rounded-full border border-black/[0.06] bg-white/60 backdrop-blur-sm px-4 py-2.5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-ink/50">
+              <span>★★★★★ Loved by early testers</span>
+              <span className="text-ink/40">·</span>
+              <span>Ships 24–48h · Free returns</span>
+              <span className="text-ink/40">·</span>
+              <span>Secure checkout</span>
+              <span className="text-ink/40">·</span>
+              <span>No fragrance · Sensitive-skin friendly</span>
+            </div>
             {/* Benefit chips */}
-            <div className="mt-4 flex flex-wrap gap-2 justify-center lg:justify-start">
+            <div className="mt-3 flex flex-wrap gap-2 justify-center lg:justify-start">
               {["Depuffs under-eyes", "Calms redness look", "10 min"].map((label) => (
                 <span
                   key={label}
-                  className="rounded-full border border-black/5 bg-white/40 px-3 py-1 text-[12px] text-ink/70 backdrop-blur-sm"
+                  className="rounded-full border border-black/5 bg-white/40 px-3 py-1 text-[12px] text-ink/80 backdrop-blur-sm"
                 >
                   {label}
                 </span>
               ))}
             </div>
-            {/* Trust row: only use if true */}
-            <p className="mt-3 text-[11px] text-ink/55 flex flex-wrap items-center justify-center lg:justify-start gap-x-3 gap-y-1">
-              <span>Dermatology-tested</span>
-              <span className="text-ink/30">·</span>
-              <span>Sensitive-skin friendly</span>
-            </p>
-            <p className="mt-1 text-sm text-ink/55">
-              ★★★★★ 4.8 from 200+ reviews
-            </p>
           </div>
 
           {/* Card column: surface plane + contact line + card */}
@@ -173,10 +180,11 @@ export function HeroSection() {
             <Link
               ref={cardRef}
               href="/products/reset-kit"
-              className="hero-card group relative z-10 flex w-full flex-col rounded-2xl border border-black/[0.08] bg-cream/95 p-5 transition-[transform,box-shadow] duration-300 ease-out hover:border-stone/30"
+              data-track="add_to_cart"
+              className="hero-card group relative z-10 flex w-full flex-col rounded-2xl border border-black/[0.10] bg-cream/95 p-5 transition-[transform,box-shadow] duration-300 ease-out hover:border-stone/30 hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,0.12)] -rotate-1"
               style={{
                 boxShadow:
-                  "inset 0 0 0 1px rgba(255,255,255,0.3), inset 0 -12px 24px -8px rgba(0,0,0,0.06), 0 4px 20px -4px rgba(0,0,0,0.06), 0 20px 56px -16px rgba(0,0,0,0.08)",
+                  "inset 0 0 0 1px rgba(255,255,255,0.4), inset 0 -12px 24px -8px rgba(0,0,0,0.06), 0 8px 24px -8px rgba(0,0,0,0.08), 0 24px 56px -16px rgba(0,0,0,0.10)",
               }}
             >
               {/* Specular edges: top-left + right */}
@@ -208,42 +216,28 @@ export function HeroSection() {
               <span className="absolute right-4 top-4 rounded-full bg-sage/15 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-sage">
                 6 patches · Individually wrapped
               </span>
-              {/* Pack area: pouch silhouette + patch pill + emboss + micro-shadow under pouch */}
-              <div className="relative mt-5">
-                <div
-                  className="absolute inset-0 top-2 rounded-xl bg-black/[0.04] blur-md"
-                  aria-hidden
-                />
-                {/* Micro-shadow under pouch */}
-                <div
-                  className="absolute left-1/2 top-[32%] w-[76%] -translate-x-1/2 h-[44%] rounded-2xl bg-black/[0.06] blur-md"
-                  aria-hidden
-                />
-                <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gradient-to-br from-sand/30 to-cream/50">
-                  {/* Pouch silhouette — rounded rectangle + specular */}
-                  <div
-                    className="absolute left-1/2 top-[22%] w-[72%] -translate-x-1/2 rounded-2xl border border-white/40 bg-white/30 shadow-inner"
-                    style={{ height: "42%", boxShadow: "inset 0 2px 8px rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.04)" }}
-                  />
-                  {/* Patch strip hint — pill */}
-                  <div className="absolute bottom-[28%] left-1/2 h-4 w-3/4 -translate-x-1/2 rounded-full bg-white/25 shadow-sm" />
-                  {/* Faint embossed wordmark */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-[10px] font-medium tracking-[0.3em] text-ink/[0.06] select-none">
-                      CRY COVERS
-                    </span>
-                  </div>
+              {/* Hero image placeholder — gradient + noise + specular + inner card */}
+              <div className="relative mt-4 aspect-[4/5] w-full overflow-hidden rounded-2xl border border-black/10 bg-gradient-to-b from-black/[0.06] via-white/60 to-black/[0.04]">
+                <div className="absolute inset-0 opacity-[0.18] [background:radial-gradient(circle_at_30%_20%,rgba(0,0,0,0.10),transparent_55%),radial-gradient(circle_at_70%_80%,rgba(0,0,0,0.08),transparent_55%)]" aria-hidden />
+                <div className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(to_right,rgba(0,0,0,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.06)_1px,transparent_1px)] [background-size:22px_22px]" aria-hidden />
+                <div className="absolute -left-10 top-10 h-40 w-40 rounded-full bg-black/[0.06] blur-2xl" aria-hidden />
+                <div className="absolute -right-10 bottom-10 h-48 w-48 rounded-full bg-black/[0.05] blur-2xl" aria-hidden />
+                <div className="absolute inset-x-6 bottom-6 rounded-2xl bg-white/70 backdrop-blur border border-black/10 p-4 shadow-[0_16px_50px_rgba(0,0,0,0.10)]">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-ink/50">Reset Kit</div>
+                  <div className="mt-1 text-sm text-ink/80">6 individually wrapped patches</div>
+                  <div className="mt-2 text-2xl font-semibold text-ink">$24</div>
                 </div>
               </div>
               <p className="mt-4 font-medium text-ink">Reset Kit</p>
-              <p className="mt-0.5 text-sm text-ink/70">6 patches · $24</p>
+              <p className="mt-0.5 text-[11px] text-ink/60">Includes: 6 individually wrapped patches</p>
               <p className="mt-2 text-xs text-ink/60 line-clamp-2">
                 Cooling hydrogel. Caffeine, niacinamide, HA. Depuff + rehydrate in 10 min.
               </p>
               <p className="mt-4">
                 <span className="text-2xl font-semibold tracking-tight text-ink">$24</span>
               </p>
-              <p className="mt-1 text-[11px] text-ink/55">Free shipping $50+ · 30-day returns</p>
+              <p className="mt-1 text-[11px] text-ink/55">Ships 24–48h · Free returns</p>
+              <p className="mt-1 text-[9px] uppercase tracking-wider text-ink/45">Same light · 10 min · single use</p>
             </Link>
           </div>
         </div>
