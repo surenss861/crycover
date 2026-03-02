@@ -57,36 +57,44 @@ export function HomePageContent() {
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, []);
 
-  // Sticky mini CTA after ~30% scroll
+  // Sticky CTA when Results section enters view
   useEffect(() => {
-    const onScroll = () => {
-      const scrolled = document.documentElement.scrollTop;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      setShowStickyCta(maxScroll > 400 && scrolled > maxScroll * 0.3);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const el = resultsRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => setShowStickyCta(e.isIntersecting),
+      { rootMargin: "-10% 0px 0px 0px", threshold: 0 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
   }, []);
 
   return (
     <>
       <HeroSection />
 
-      {/* Full-bleed brand band — interrupts the scroll */}
-      <div className="border-b border-black/[0.06] bg-ink/[0.03] py-8 md:py-10 min-h-[140px] md:min-h-[160px] flex items-center justify-center">
-        <p className="text-center text-lg md:text-xl font-medium tracking-tight text-ink/85 px-4">
-          Visible calm in 10 minutes.
-        </p>
+      {/* Full-bleed band — scene change: gradient + rule + type moment */}
+      <div className="relative border-b border-black/[0.04] py-14 md:py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/[0.03] to-transparent pointer-events-none" aria-hidden />
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "180px 180px" }} aria-hidden />
+        <div className="absolute left-1/2 bottom-0 w-[80%] max-w-md h-px -translate-x-1/2 bg-black/[0.06]" aria-hidden />
+        <div className="relative mx-auto max-w-[980px] px-4 text-center">
+          <p className="text-[28px] md:text-[34px] font-medium tracking-[-0.02em] text-ink">
+            Visible calm in 10 minutes.
+          </p>
+          <p className="mt-2 text-sm text-ink/60">
+            Gentle care — no explanation needed.
+          </p>
+        </div>
       </div>
 
       <section
         ref={socialRef}
-        className="border-b border-black/[0.08] bg-cream/80 px-4 py-6 md:px-6 md:py-8"
+        className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-[1100px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="Proof" />
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-center">
             <span className="text-sm text-ink/80">★★★★★ 4.8 from 200+ reviews</span>
             <span className="text-sm text-ink/70">Loved by people who don&apos;t want to explain.</span>
             <blockquote className="w-full text-sm italic text-ink/90 md:max-w-md">
@@ -98,19 +106,19 @@ export function HomePageContent() {
 
       <section
         ref={howRef}
-        className="relative border-b border-black/[0.08] bg-[#F5F3EF] px-4 py-12 md:px-6 md:py-16"
+        className="relative border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
         <PatchMotif className="right-8 top-1/2 -translate-y-1/2 md:right-12" />
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-[1100px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="How it works" />
-          <Panel className="mt-4 px-8 py-12">
-            <h2 className="text-center text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+          <Panel className="px-8 py-12">
+            <h2 className="text-center text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-ink">
               How it works
             </h2>
             <p className="mx-auto mt-2 max-w-md text-center text-sm text-ink/70">
               Designed for the places feelings show first.
             </p>
-            <div className="mt-12 grid gap-10 md:grid-cols-3">
+            <div className="mt-10 grid gap-6 md:gap-10 md:grid-cols-3">
               {[
                 { step: "1", title: "Apply", text: "Place under eyes + upper cheek.", Icon: IconApply },
                 { step: "2", title: "Rest", text: "10 minutes. Cool, calm, no rush.", Icon: IconRest },
@@ -130,10 +138,10 @@ export function HomePageContent() {
       </section>
 
       {/* Narrative: When you'd use it */}
-      <section className="border-b border-black/[0.08] bg-cream/70 px-4 py-6 md:px-6 md:py-8">
-        <div className="mx-auto max-w-2xl">
+      <section className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[980px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="When you'd use it" />
-          <ul className="mt-4 space-y-2 text-sm text-ink/80">
+          <ul className="space-y-2 text-sm text-ink/80">
             <li className="flex items-center gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-sage/50" />
               After crying
@@ -151,9 +159,9 @@ export function HomePageContent() {
       </section>
 
       {/* Chapter divider: How → Product */}
-      <div className="border-b border-black/[0.06] bg-cream/90 py-3 md:py-4">
-        <div className="mx-auto max-w-5xl px-4 md:px-6">
-          <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-stone/70">
+      <div className="border-t border-black/[0.04] bg-surface py-4 md:py-5">
+        <div className="mx-auto max-w-[1100px] px-4 md:px-6">
+          <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-ink/50">
             The Reset Kit
           </span>
         </div>
@@ -161,17 +169,17 @@ export function HomePageContent() {
 
       <section
         ref={productRef}
-        className="border-b border-black/[0.08] bg-sand/20 px-4 py-12 md:px-6 md:py-16"
+        className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-[1100px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="The product" />
-          <Panel className="mt-4 px-8 py-12">
-            <div className="grid items-center gap-12 md:grid-cols-2">
+          <Panel className="px-8 py-12">
+            <div className="grid items-center gap-6 md:gap-10 md:grid-cols-2">
               <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-sand/50 to-cream/80 flex items-center justify-center text-ink/55 text-sm border border-black/[0.08]">
                 [Product image / short demo video]
               </div>
               <div>
-                <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+                <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-ink">
                   The Reset Kit
                 </h2>
                 <p className="mt-4 text-ink/80">
@@ -198,8 +206,8 @@ export function HomePageContent() {
       </section>
 
       {/* Narrative: What it's not (trust builder) */}
-      <section className="border-b border-black/[0.08] bg-sand/10 px-4 py-6 md:px-6 md:py-8">
-        <div className="mx-auto max-w-2xl">
+      <section className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[980px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="What it's not" />
           <ul className="mt-4 space-y-2 text-sm text-ink/70">
             <li className="flex items-center gap-3">
@@ -219,12 +227,12 @@ export function HomePageContent() {
       </section>
 
       {/* Editorial split — break the rhythm: copy left, visual right */}
-      <section className="border-b border-black/[0.08] bg-cream/90 px-4 py-10 md:px-6 md:py-14">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-            <div>
+      <section className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="grid items-center gap-6 md:gap-10 md:grid-cols-2">
+            <div className="flex flex-col gap-6 md:gap-10">
               <SectionRail label="Why it works" />
-              <h2 className="mt-3 text-xl font-semibold tracking-tight text-ink md:text-2xl">
+              <h2 className="text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-ink">
                 Gentle actives where you need them
               </h2>
               <p className="mt-3 text-sm text-ink/80">
@@ -245,7 +253,7 @@ export function HomePageContent() {
                 </li>
               </ul>
             </div>
-            <div className="aspect-[4/5] max-h-[360px] md:max-h-none rounded-2xl bg-gradient-to-br from-sand/40 to-cream/70 border border-black/[0.06] flex items-center justify-center overflow-hidden">
+            <div className="aspect-[4/5] max-h-[360px] md:max-h-none rounded-2xl bg-white/75 border border-black/5 shadow-card flex items-center justify-center overflow-hidden">
               <div className="w-[60%] h-[50%] rounded-2xl border border-white/50 bg-white/40 shadow-inner flex items-center justify-center">
                 <span className="text-[10px] tracking-[0.2em] text-ink/[0.2]">POUCH</span>
               </div>
@@ -254,77 +262,80 @@ export function HomePageContent() {
         </div>
       </section>
 
-      {/* Results = raw proof mode (no panel, clinical vibe) */}
+      {/* Results = card token + photo-frame language */}
       <section
         ref={resultsRef}
-        className="relative border-b border-black/[0.08] bg-[#f5f2ee] px-4 py-12 md:px-6 md:py-16"
+        className="relative border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
         <PatchMotif className="bottom-12 left-8 md:left-12" />
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-[1100px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="Real results" />
-          <h2 className="mt-3 text-center text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+          <h2 className="text-center text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-ink">
             Real results
           </h2>
-          <p className="mx-auto mt-1 max-w-xl text-center text-sm text-ink/70">
+          <p className="mx-auto max-w-xl text-center text-sm text-ink/70">
             Honest lighting. Real moments.
           </p>
-          <p className="mt-2 text-center text-[10px] uppercase tracking-[0.2em] text-ink/50">
+          <p className="text-center text-[10px] uppercase tracking-[0.2em] text-ink/45">
             Tap or drag to compare
           </p>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3 md:grid-rows-2">
-            {/* BA 1 — with skin-texture noise overlay + caption */}
-            <div className="relative rounded-3xl border border-black/8 bg-white/80 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.06)] md:row-span-2">
-              <div className="absolute left-4 top-4 text-[8px] tracking-[0.2em] uppercase text-ink/60 z-10">
+          <div className="grid gap-6 md:grid-cols-3 md:grid-rows-2">
+            {/* BA 1 — card token + ring + shadow-inner frame + caption block */}
+            <div className="relative rounded-3xl border border-black/5 bg-white/75 p-5 shadow-card md:row-span-2">
+              <div className="absolute left-4 top-4 text-[8px] tracking-[0.2em] uppercase text-ink/50 z-10">
                 SAME LIGHT / NO FILTERS / 10 MIN
               </div>
-              <div className="mt-8 rounded-2xl border border-black/5 h-[420px] overflow-hidden relative bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0]">
+              <div className="mt-8 rounded-2xl ring-1 ring-black/5 h-[420px] overflow-hidden relative bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0] shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)]">
                 <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px 120px" }} aria-hidden />
               </div>
               <div className="mt-4 text-center text-[10px] tracking-[0.2em] uppercase text-ink/40">BEFORE | AFTER</div>
               <div className="mt-2 mx-auto w-[70%] h-2 rounded-full bg-black/10 relative">
                 <div className="absolute left-0 top-0 h-2 w-1/2 rounded-full bg-sage/40" />
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-white border border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.12)]" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-white border border-black/10 shadow-tight" />
               </div>
-              <p className="mt-3 text-[11px] tabular-nums text-ink/60">Under-eye puffiness (10 min)</p>
+              <div className="mt-4">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-ink/45">Focus</p>
+                <p className="mt-0.5 text-sm text-ink/80">Under-eye puffiness (10 min)</p>
+              </div>
             </div>
             {/* BA 2 */}
-            <div className="relative rounded-3xl border border-black/8 bg-white/80 p-5 shadow-[0_8px_32px_rgba(0,0,0,0.06)] md:row-span-2">
-              <div className="absolute left-4 top-4 text-[8px] tracking-[0.2em] uppercase text-ink/60 z-10">
+            <div className="relative rounded-3xl border border-black/5 bg-white/75 p-5 shadow-card md:row-span-2">
+              <div className="absolute left-4 top-4 text-[8px] tracking-[0.2em] uppercase text-ink/50 z-10">
                 SAME LIGHT / NO FILTERS / 10 MIN
               </div>
-              <div className="mt-8 rounded-2xl border border-black/5 h-[420px] overflow-hidden relative bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0]">
+              <div className="mt-8 rounded-2xl ring-1 ring-black/5 h-[420px] overflow-hidden relative bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0] shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)]">
                 <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: "120px 120px" }} aria-hidden />
               </div>
               <div className="mt-4 text-center text-[10px] tracking-[0.2em] uppercase text-ink/40">BEFORE | AFTER</div>
               <div className="mt-2 mx-auto w-[70%] h-2 rounded-full bg-black/10 relative">
                 <div className="absolute left-0 top-0 h-2 w-1/2 rounded-full bg-sage/40" />
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-white border border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.12)]" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-white border border-black/10 shadow-tight" />
               </div>
-              <p className="mt-3 text-[11px] tabular-nums text-ink/60">Redness look (10 min)</p>
+              <div className="mt-4">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-ink/45">Focus</p>
+                <p className="mt-0.5 text-sm text-ink/80">Redness look (10 min)</p>
+              </div>
             </div>
-            <div className="rounded-3xl border border-black/5 bg-sage/5 p-5 flex flex-col justify-center">
+            <div className="rounded-3xl border border-black/5 bg-white/75 p-5 flex flex-col justify-center shadow-card">
               <p className="text-sm italic text-ink/90">&ldquo;I keep one in my bag. No one has to know.&rdquo;</p>
               <p className="mt-2 text-[11px] text-ink/60">— Real customer</p>
             </div>
-            <div className="rounded-3xl border border-black/5 bg-white/80 p-5 flex flex-col justify-center shadow-[0_8px_32px_rgba(0,0,0,0.04)]">
+            <div className="rounded-3xl border border-black/5 bg-white/75 p-5 flex flex-col justify-center shadow-card">
               <p className="text-xs font-medium uppercase tracking-wider text-sage mb-1">Routine</p>
               <p className="text-sm text-ink/80">Fridge → apply 10 min → remove</p>
             </div>
           </div>
 
-          {/* Trust micro-row below Results */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] text-ink/60">
-            <span>No filters. Same light. 10 minutes.</span>
-            <span>Individually wrapped.</span>
-            <span>Sensitive-skin friendly.</span>
-          </div>
+          {/* Trust row: one line, em dashes */}
+          <p className="text-center text-[11px] text-ink/55">
+            No filters — Same light — 10 minutes — Sensitive-skin friendly
+          </p>
 
-          <div className="mt-8 text-center">
+          <div className="text-center">
             <Link href="/results" className="inline-block text-sage font-medium hover:underline">
               See results →
             </Link>
-            <p className="mt-1 text-[11px] text-ink/55">No filters. Honest lighting.</p>
           </div>
         </div>
       </section>
@@ -332,11 +343,11 @@ export function HomePageContent() {
       {/* Ingredients = quiet spec sheet (no panel) */}
       <section
         ref={ingredientsRef}
-        className="border-b border-black/[0.08] bg-sand/10 px-4 py-8 md:px-6 md:py-10"
+        className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-[980px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="Ingredients" />
-          <div className="mt-4 border-l-2 border-sage/20 pl-6 py-2">
+          <div className="border-l-2 border-sage/20 pl-6 py-2">
             <p className="text-sm text-ink/80 leading-relaxed">
               Caffeine · Niacinamide · Hyaluronic acid · Gentle, no harsh actives.
               Safe for sensitive skin. Not a medical product — for cosmetic use only.
@@ -350,11 +361,11 @@ export function HomePageContent() {
 
       <section
         ref={bundleRef}
-        className="border-b border-black/[0.08] bg-cream/60 px-4 py-8 md:px-6 md:py-8"
+        className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-[980px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="Save more" />
-          <div className="mt-4 text-center">
+          <div className="text-center">
           <p className="text-ink/80">
             Save with our Duo or Trio — keep one at home, one in your bag.
           </p>
@@ -371,12 +382,12 @@ export function HomePageContent() {
       {/* Wind-down: details mode — keep panel for FAQ */}
       <section
         ref={faqRef}
-        className="border-b border-black/[0.06] bg-sand/15 px-4 py-12 md:px-6 md:py-16"
+        className="border-t border-black/[0.04] bg-surface px-4 py-14 md:py-20"
       >
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-[980px] flex flex-col gap-6 md:gap-10">
           <SectionRail label="Quick answers" />
-          <Panel className="mt-4 px-8 py-12">
-            <h2 className="text-center text-2xl font-semibold tracking-tight text-ink">
+          <Panel className="px-8 py-12">
+            <h2 className="text-center text-[28px] md:text-[32px] font-semibold tracking-[-0.02em] text-ink">
               Quick answers
             </h2>
             <ul className="mt-8 space-y-6">
@@ -399,20 +410,20 @@ export function HomePageContent() {
         </div>
       </section>
 
-      {/* Sticky mini CTA — appears after ~30% scroll */}
+      {/* Sticky CTA — when Results in view; quiet luxury */}
       {showStickyCta && (
-        <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-black/[0.08] bg-cream/98 backdrop-blur-sm py-3 px-4 md:py-3 md:px-6">
-          <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
-            <div>
-              <p className="font-semibold text-ink">Reset Kit</p>
-              <p className="text-sm text-ink/60">$24 · 6 patches</p>
+        <div className="fixed bottom-0 left-0 right-0 z-40 h-14 border-t border-black/5 bg-white/70 backdrop-blur-xl flex items-center">
+          <div className="mx-auto w-full max-w-[1100px] px-4 flex items-center justify-between gap-4">
+            <p className="text-[11px] text-ink/55 hidden sm:block">In stock · Ships fast</p>
+            <div className="flex-1 flex items-center justify-center sm:justify-end gap-4">
+              <p className="font-medium text-ink text-sm">Reset Kit — $24</p>
+              <Link
+                href="/products/reset-kit"
+                className="rounded-full border border-black/10 bg-ink/90 px-4 py-2 text-[13px] font-medium text-white hover:bg-ink transition"
+              >
+                Shop now
+              </Link>
             </div>
-            <Link
-              href="/products/reset-kit"
-              className="flex-shrink-0 rounded-full bg-ink px-6 py-2.5 text-sm font-medium text-cream hover:bg-ink/90 transition"
-            >
-              Shop now
-            </Link>
           </div>
         </div>
       )}

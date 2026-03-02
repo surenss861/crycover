@@ -17,10 +17,13 @@ const config: Config = {
         charcoal: "#2C2A28",
         ink: "#2B2B2B",
         mist: "#B8B3AB",
+        surface: "#f6f3ef",
       },
       boxShadow: {
-        panel: "0 20px 60px rgba(0,0,0,0.06)",
+        panel: "0 10px 28px rgba(0,0,0,0.06)",
         panelInner: "inset 0 0 0 1px rgba(255,255,255,0.4)",
+        card: "0 12px 40px rgba(0,0,0,0.08)",
+        tight: "0 2px 10px rgba(0,0,0,0.05)",
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],

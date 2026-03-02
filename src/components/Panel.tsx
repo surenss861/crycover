@@ -1,6 +1,6 @@
 /**
- * Premium panel: card on soft surface.
- * bg-white/55, inner border, top specular, wide soft shadow.
+ * Panel (details mode): one shadow ladder token.
+ * bg-white/60 border-black/5 shadow-panel.
  */
 export function Panel({
   children,
@@ -11,15 +11,11 @@ export function Panel({
 }) {
   return (
     <div
-      className={`relative rounded-3xl border border-black/5 bg-white/55 shadow-panel ${className}`}
-      style={{
-        boxShadow: "0 20px 60px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(255,255,255,0.4)",
-      }}
+      className={`relative rounded-3xl border border-black/5 bg-white/60 shadow-panel ${className}`}
     >
-      {/* Top-edge specular highlight */}
       <div
-        className="absolute inset-x-4 top-0 h-px rounded-full opacity-60 pointer-events-none"
-        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)" }}
+        className="absolute inset-x-4 top-0 h-px rounded-full opacity-50 pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent)" }}
         aria-hidden
       />
       {children}

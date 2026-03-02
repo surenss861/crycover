@@ -11,7 +11,7 @@ export default function StoreLayout({
     <>
       <PageFilm />
       <Nav />
-      <main className="relative min-h-screen bg-cream/50">{children}</main>
+      <main className="relative min-h-screen bg-surface">{children}</main>
       <Footer />
     </>
   );

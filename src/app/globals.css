@@ -13,7 +13,8 @@
 }
 
 body {
-  @apply bg-cream text-charcoal antialiased;
+  @apply text-charcoal antialiased;
+  background-color: #f6f3ef;
 }
 
 @layer utilities {

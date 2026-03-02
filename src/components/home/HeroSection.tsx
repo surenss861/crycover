@@ -44,7 +44,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden border-b border-black/[0.08] bg-gradient-to-b from-sand/40 to-cream px-4 py-14 md:py-20 md:px-6 min-h-[78vh] flex flex-col justify-center">
+    <section className="relative overflow-hidden border-b border-black/[0.06] bg-gradient-to-b from-sand/30 to-surface px-4 py-14 md:py-20 md:px-6 min-h-[78vh] flex flex-col justify-center">
       <HeroCanvas />
 
       {/* Atmospheric wordmark — not shouting */}
