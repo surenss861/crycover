@@ -80,23 +80,25 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto w-full max-w-5xl">
         <div className="grid items-end gap-8 lg:grid-cols-[1fr,300px] lg:gap-14">
           <div className="text-center lg:text-left pb-2">
+            {/* Eyebrow: tiny caps, high tracking, darker rail */}
+            <p
+              ref={proofNoteRef}
+              className="text-[10px] font-medium uppercase tracking-[0.25em] text-ink/70 mb-3 flex items-center gap-3 justify-center lg:justify-start"
+            >
+              <span className="h-px w-8 bg-ink/20" aria-hidden />
+              Visible calm in 10 minutes
+            </p>
             <h1
               ref={headlineRef}
-              className="text-4xl font-medium tracking-[-0.03em] text-ink md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08]"
+              className="text-4xl font-semibold tracking-[-0.03em] text-ink md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08]"
             >
               10-minute{" "}
               <span className="border-b-2 border-sage/40 pb-0.5">reset</span>
               <br className="hidden sm:block" />
-              <span className="italic text-ink/85 leading-[1.08]">for after emotional moments</span>
+              <span className="italic text-ink/90 leading-[1.08]">for after emotional moments</span>
             </h1>
-            <p ref={subheadRef} className="mt-4 text-lg text-ink/60 max-w-lg md:text-xl">
+            <p ref={subheadRef} className="mt-4 text-lg text-ink/80 max-w-lg md:text-xl">
               When feelings show up on your face. Gentle care — no explanation needed.
-            </p>
-            <p
-              ref={proofNoteRef}
-              className="mt-3 text-[11px] font-medium uppercase tracking-[0.2em] text-sage/90"
-            >
-              Visible calm in 10 minutes.
             </p>
             <div ref={ctasRef} className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
               <Button href="/products/reset-kit">Shop Reset Kit</Button>
@@ -104,6 +106,7 @@ export function HeroSection() {
                 Take the 15-sec finder
               </Button>
             </div>
+            {/* Benefit chips */}
             <div className="mt-5 flex flex-wrap gap-2 justify-center lg:justify-start">
               {["Depuffs under-eyes", "Calms redness look", "10 min reset"].map((label) => (
                 <span
@@ -114,7 +117,15 @@ export function HeroSection() {
                 </span>
               ))}
             </div>
-            <p className="mt-3 text-sm text-stone">
+            {/* Micro trust row (3 items) */}
+            <p className="mt-4 text-[11px] text-ink/55 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-1">
+              <span>No harsh actives</span>
+              <span className="text-ink/30">·</span>
+              <span>Individually wrapped</span>
+              <span className="text-ink/30">·</span>
+              <span>Sensitive-skin friendly</span>
+            </p>
+            <p className="mt-2 text-sm text-ink/55">
               4.8 from 200+ reviews · Keep one at home, one in your bag
             </p>
           </div>
@@ -193,14 +204,19 @@ export function HeroSection() {
               <span className="absolute right-4 top-4 rounded-full bg-sage/15 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-sage">
                 6 patches · Individually wrapped
               </span>
-              {/* Pack area: pouch silhouette + patch pill + faint emboss */}
+              {/* Pack area: pouch silhouette + patch pill + emboss + micro-shadow under pouch */}
               <div className="relative mt-5">
                 <div
                   className="absolute inset-0 top-2 rounded-xl bg-black/[0.04] blur-md"
                   aria-hidden
                 />
+                {/* Micro-shadow under pouch */}
+                <div
+                  className="absolute left-1/2 top-[32%] w-[76%] -translate-x-1/2 h-[44%] rounded-2xl bg-black/[0.06] blur-md"
+                  aria-hidden
+                />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-gradient-to-br from-sand/30 to-cream/50">
-                  {/* Pouch silhouette — rounded rectangle */}
+                  {/* Pouch silhouette — rounded rectangle + specular */}
                   <div
                     className="absolute left-1/2 top-[22%] w-[72%] -translate-x-1/2 rounded-2xl border border-white/40 bg-white/30 shadow-inner"
                     style={{ height: "42%", boxShadow: "inset 0 2px 8px rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.04)" }}
