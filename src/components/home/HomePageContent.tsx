@@ -83,7 +83,7 @@ export function HomePageContent() {
         <PatchMotif className="right-8 top-1/2 -translate-y-1/2 md:right-12" />
         <div className="mx-auto max-w-5xl">
           <SectionRail label="How it works" />
-          <Panel className="mt-4 px-6 py-10 md:px-8 md:py-12">
+          <Panel className="mt-4 px-8 py-12">
             <h2 className="text-center text-2xl font-medium tracking-tight text-ink md:text-3xl">
               How it works
             </h2>
@@ -110,7 +110,7 @@ export function HomePageContent() {
       </section>
 
       {/* Narrative: When you'd use it */}
-      <section className="border-b border-black/[0.08] bg-cream/70 px-4 py-8 md:px-6 md:py-10">
+      <section className="border-b border-black/[0.08] bg-cream/70 px-4 py-6 md:px-6 md:py-8">
         <div className="mx-auto max-w-2xl">
           <SectionRail label="When you'd use it" />
           <ul className="mt-4 space-y-2 text-sm text-ink/80">
@@ -145,7 +145,7 @@ export function HomePageContent() {
       >
         <div className="mx-auto max-w-5xl">
           <SectionRail label="The product" />
-          <Panel className="mt-4 px-6 py-10 md:px-8 md:py-12">
+          <Panel className="mt-4 px-8 py-12">
             <div className="grid items-center gap-12 md:grid-cols-2">
               <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-sand/50 to-cream/80 flex items-center justify-center text-stone text-sm border border-black/[0.08]">
                 [Product image / short demo video]
@@ -178,7 +178,7 @@ export function HomePageContent() {
       </section>
 
       {/* Narrative: What it's not (trust builder) */}
-      <section className="border-b border-black/[0.08] bg-sand/10 px-4 py-8 md:px-6 md:py-10">
+      <section className="border-b border-black/[0.08] bg-sand/10 px-4 py-6 md:px-6 md:py-8">
         <div className="mx-auto max-w-2xl">
           <SectionRail label="What it's not" />
           <ul className="mt-4 space-y-2 text-sm text-stone">
@@ -205,9 +205,6 @@ export function HomePageContent() {
         <PatchMotif className="bottom-12 left-8 md:left-12" />
         <div className="mx-auto max-w-5xl">
           <SectionRail label="Real results" />
-          <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.15em] text-stone/70">
-            Same light · no filter · 10 min
-          </p>
           <h2 className="mt-3 text-center text-2xl font-medium tracking-tight text-ink md:text-3xl">
             Real results
           </h2>
@@ -215,45 +212,47 @@ export function HomePageContent() {
             Honest lighting. Real moments.
           </p>
 
-          {/* 4-card mosaic: left 2 tall BA, right column quote + routine */}
-          <div className="mt-8 grid gap-4 md:grid-cols-3 md:grid-rows-2">
-            {/* BA 1 — taller */}
-            <div className="relative rounded-2xl border border-black/[0.08] bg-white/70 p-4 overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.05)] md:row-span-2">
-              <span className="absolute left-3 top-3 z-10 rounded bg-ink/8 px-2 py-0.5 text-[8px] font-medium uppercase tracking-wider text-ink/80">
+          {/* Proof gallery: 3-col / 2-row mosaic, photo frames + slider rail */}
+          <div className="mt-8 grid gap-6 md:grid-cols-3 md:grid-rows-2">
+            {/* BA 1 — tall, photo frame */}
+            <div className="relative rounded-3xl border border-black/5 bg-white/55 p-5 shadow-panel md:row-span-2">
+              <div className="absolute left-4 top-4 text-[8px] tracking-[0.2em] uppercase text-ink/60">
                 SAME LIGHT / NO FILTERS / 10 MIN
-              </span>
-              <div className="aspect-[3/4] mt-6 rounded-xl overflow-hidden bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0] flex flex-col items-center justify-center gap-2">
-                <span className="text-[10px] font-medium uppercase tracking-wider text-ink/50">Before | After</span>
-                <div className="flex w-full max-w-[70%] items-center rounded-full bg-black/10 p-1">
-                  <div className="h-2 flex-1 rounded-full bg-sage/40" />
-                  <div className="h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sage shadow-[0_1px_3px_rgba(0,0,0,0.12)]" />
-                </div>
               </div>
-              <p className="mt-3 text-[11px] text-stone/90 tabular-nums">10 min · same light</p>
+              <div className="mt-8 rounded-2xl border border-black/5 bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0] h-[420px]" />
+              <div className="mt-4 text-center text-[10px] tracking-[0.2em] uppercase text-ink/40">
+                BEFORE | AFTER
+              </div>
+              <div className="mt-2 mx-auto w-[70%] h-2 rounded-full bg-black/10 relative">
+                <div className="absolute left-0 top-0 h-2 w-1/2 rounded-full bg-sage/40" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-white border border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.12)]" />
+              </div>
+              <p className="mt-3 text-[11px] tabular-nums text-stone-600">10 min · same light</p>
             </div>
-            {/* BA 2 — taller */}
-            <div className="relative rounded-2xl border border-black/[0.08] bg-white/70 p-4 overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.05)] md:row-span-2">
-              <span className="absolute left-3 top-3 z-10 rounded bg-ink/8 px-2 py-0.5 text-[8px] font-medium uppercase tracking-wider text-ink/80">
+            {/* BA 2 — tall */}
+            <div className="relative rounded-3xl border border-black/5 bg-white/55 p-5 shadow-panel md:row-span-2">
+              <div className="absolute left-4 top-4 text-[8px] tracking-[0.2em] uppercase text-ink/60">
                 SAME LIGHT / NO FILTERS / 10 MIN
-              </span>
-              <div className="aspect-[3/4] mt-6 rounded-xl overflow-hidden bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0] flex flex-col items-center justify-center gap-2">
-                <span className="text-[10px] font-medium uppercase tracking-wider text-ink/50">Before | After</span>
-                <div className="flex w-full max-w-[70%] items-center rounded-full bg-black/10 p-1">
-                  <div className="h-2 flex-1 rounded-full bg-sage/40" />
-                  <div className="h-2.5 w-2.5 flex-shrink-0 rounded-full bg-sage shadow-[0_1px_3px_rgba(0,0,0,0.12)]" />
-                </div>
               </div>
-              <p className="mt-3 text-[11px] text-stone/90 tabular-nums">10 min · same light</p>
+              <div className="mt-8 rounded-2xl border border-black/5 bg-gradient-to-b from-[#e8ddd5] via-[#f0eae4] to-[#e2d9d0] h-[420px]" />
+              <div className="mt-4 text-center text-[10px] tracking-[0.2em] uppercase text-ink/40">
+                BEFORE | AFTER
+              </div>
+              <div className="mt-2 mx-auto w-[70%] h-2 rounded-full bg-black/10 relative">
+                <div className="absolute left-0 top-0 h-2 w-1/2 rounded-full bg-sage/40" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-white border border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.12)]" />
+              </div>
+              <p className="mt-3 text-[11px] tabular-nums text-stone-600">10 min · same light</p>
             </div>
-            {/* Quote — right top */}
-            <div className="rounded-2xl border border-black/[0.08] bg-sage/5 p-4 flex flex-col justify-center shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
+            {/* Quote — human proof, slight sage */}
+            <div className="rounded-3xl border border-black/5 bg-sage/5 p-5 flex flex-col justify-center shadow-panel">
               <p className="text-sm italic text-ink/90">
                 &ldquo;I keep one in my bag. No one has to know.&rdquo;
               </p>
               <p className="mt-2 text-[11px] text-stone">— Real customer</p>
             </div>
-            {/* Routine — right bottom */}
-            <div className="rounded-2xl border border-black/[0.08] bg-white/70 p-4 flex flex-col justify-center shadow-[0_12px_40px_rgba(0,0,0,0.05)]">
+            {/* Routine */}
+            <div className="rounded-3xl border border-black/5 bg-white/55 p-5 flex flex-col justify-center shadow-panel">
               <p className="text-xs font-medium uppercase tracking-wider text-sage mb-1">Routine</p>
               <p className="text-sm text-ink">Fridge → apply 10 min → remove</p>
             </div>
@@ -277,7 +276,7 @@ export function HomePageContent() {
       >
         <div className="mx-auto max-w-3xl">
           <SectionRail label="Ingredients" />
-          <Panel className="mt-4 text-center px-6 py-6 md:px-8 md:py-8">
+          <Panel className="mt-4 text-center px-8 py-8">
           <p className="text-sm text-stone">
             Caffeine · Niacinamide · Hyaluronic acid · Gentle, no harsh actives.
             Safe for sensitive skin. Not a medical product — for cosmetic use only.
@@ -291,7 +290,7 @@ export function HomePageContent() {
 
       <section
         ref={bundleRef}
-        className="border-b border-black/[0.08] bg-cream/60 px-4 py-8 md:px-6"
+        className="border-b border-black/[0.08] bg-cream/60 px-4 py-8 md:px-6 md:py-8"
       >
         <div className="mx-auto max-w-2xl">
           <SectionRail label="Save more" />
@@ -316,7 +315,7 @@ export function HomePageContent() {
       >
         <div className="mx-auto max-w-2xl">
           <SectionRail label="Quick answers" />
-          <Panel className="mt-4 px-6 py-8 md:px-8 md:py-12">
+          <Panel className="mt-4 px-8 py-12">
             <h2 className="text-center text-2xl font-medium tracking-tight text-ink">
               Quick answers
             </h2>

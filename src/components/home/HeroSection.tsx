@@ -47,15 +47,16 @@ export function HeroSection() {
     <section className="relative overflow-hidden border-b border-black/[0.08] bg-gradient-to-b from-sand/40 to-cream px-4 py-14 md:py-20 md:px-6 min-h-[78vh] flex flex-col justify-center">
       <HeroCanvas />
 
-      {/* Editorial wordmark — very faint, blurred, mask fade so it feels atmospheric */}
+      {/* Atmospheric wordmark — not shouting */}
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none opacity-[0.04] blur-[0.5px]"
-        style={{ maskImage: "linear-gradient(to right, transparent 15%, black 35%, black 65%, transparent 85%)", WebkitMaskImage: "linear-gradient(to right, transparent 15%, black 35%, black 65%, transparent 85%)" }}
+        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center text-[18vw] font-semibold tracking-[-0.06em] text-ink/[0.04] blur-[0.5px] select-none"
+        style={{
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
+        }}
         aria-hidden
       >
-        <span className="whitespace-nowrap text-[clamp(5rem,16vw,12rem)] font-medium tracking-tight text-ink">
-          CRY COVERS
-        </span>
+        CRY COVERS
       </div>
 
       {/* Global hero vignette (softer) */}
@@ -88,7 +89,7 @@ export function HeroSection() {
               <br className="hidden sm:block" />
               <span className="italic text-ink/85 leading-[1.08]">for after emotional moments</span>
             </h1>
-            <p ref={subheadRef} className="mt-5 text-lg text-ink/60 max-w-lg md:text-xl">
+            <p ref={subheadRef} className="mt-4 text-lg text-ink/60 max-w-lg md:text-xl">
               When feelings show up on your face. Gentle care — no explanation needed.
             </p>
             <p
@@ -103,11 +104,11 @@ export function HeroSection() {
                 Take the 15-sec finder
               </Button>
             </div>
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+            <div className="mt-5 flex flex-wrap gap-2 justify-center lg:justify-start">
               {["Depuffs under-eyes", "Calms redness look", "10 min reset"].map((label) => (
                 <span
                   key={label}
-                  className="rounded-full border border-black/5 bg-white/40 px-3 py-1.5 text-[12px] text-ink/80 backdrop-blur-sm"
+                  className="rounded-full border border-black/5 bg-white/40 px-3 py-1 text-[12px] text-ink/70 backdrop-blur-sm"
                 >
                   {label}
                 </span>
@@ -118,18 +119,16 @@ export function HeroSection() {
             </p>
           </div>
 
-          {/* Card column: scene layers behind card */}
+          {/* Card column: surface plane + contact line + card */}
           <div className="relative mx-auto w-full max-w-[300px] lg:mx-0 lg:translate-x-1 lg:mt-6">
-            {/* Surface plane: tabletop band + contact shadow */}
+            {/* Surface plane band */}
             <div
-              className="pointer-events-none absolute left-1/2 top-[55%] z-0 h-[28%] w-[110%] -translate-x-1/2 -translate-y-1/2"
+              className="pointer-events-none absolute left-[-10%] right-[-10%] top-[58%] z-0 h-36 bg-gradient-to-b from-white/0 via-white/55 to-white/0"
               aria-hidden
-              style={{
-                background: "linear-gradient(180deg, transparent 0%, rgba(232,228,222,0.25) 20%, rgba(248,246,243,0.4) 50%, rgba(232,228,222,0.2) 100%)",
-              }}
             />
+            {/* Contact shadow line */}
             <div
-              className="pointer-events-none absolute left-1/2 top-[72%] z-0 h-px w-[95%] -translate-x-1/2 bg-black/[0.06]"
+              className="pointer-events-none absolute left-[10%] right-[10%] top-[72%] z-0 h-px bg-black/10"
               aria-hidden
             />
             {/* Spotlight halo + beam + reflection */}
